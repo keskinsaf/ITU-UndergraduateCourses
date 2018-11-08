@@ -1,0 +1,52 @@
+Homework1 Comments
+
+1.
+	First the messages these are belongs to parent is written, and parent 
+	started waiting for state changes of child proccesses. Then messages of
+	child are written. Then sleep command worked, and child functions are 
+	completed. After that, the parent proccess that is waiting for child is 
+	finished.
+
+2.
+	Parent of parent's process id is always the same. Because it is always 
+	started by the same process (most probably the 'bash') and it is written 
+	first. Order of outputs from processes may change except the first output, 
+	but the first output from parent process scope is always printed before 
+	the child process' outputs.
+
+3.
+	Now parent process does not wait to child finish its job. It terminates 
+	whenever it completes its job. So, parent process always terminates 
+	before than child. Because the parent process does no longer exist, the 
+	pid of the child process become 1. In addition, because of parent process 
+	finishes, we see that bash starts to wait input from us and after 1 second,
+	 output is also written to screen, because it is the time when child 
+	 process actually terminates itself.
+
+4.
+	Before the fork, there was only one horse parameter. But whenever the fork 
+	is observed, both processes had its own horse parameter with the same 
+	value. But after they have forked and they assigned their own values to the parameter, we saw different values as expected.
+
+5.
+	Each process has its own space and its own informations in this space. 
+	Their spaces is shown as the only memory space the available on the pc. 
+	So, when we fork the process, we see the same adress numbers on different 
+	process and different values are stored in these areas. This is normal, 
+	because they are not really at the same positions. For example, first 
+	process' adress might be 192 and it accepts this address as 0, then incomer
+	 variables are allocated in new positions. But for another process, this 
+	 address might be 8932 or something like that, and this process accepts 
+	 this point as its origin, too. Then, we can see different values on the 
+	 same address when we want to print some adresses, but they are not the 
+	 same in reality.
+
+6.
+	--for p1
+	Main thread created 3 different processes and non of these child processes
+	created another child. There are only 1 parent and 3 child processes.
+	--for p2
+	In this program, p2 uses a function(pthread_create) to create new threads.
+	Also it tells what to do (call 'my_function' with parameter 'i') in this 
+	function. So, in this example, main thread created 3 different child 
+	threads and when exiting, it didn't take care of child processes.
