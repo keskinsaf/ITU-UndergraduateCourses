@@ -1,6 +1,5 @@
 from ArgumentError import ArgumentError
-from Pitcher import Pitcher
-from Utils import convert2Wav, readAndProcessWav, readAndProcessWavUsingRftt
+from Utils import convert2Wav, readAndProcessWavUsingRftt
 
 if __name__ == "__main__":
     try:

@@ -14,7 +14,10 @@ def readAndProcessWavUsingRftt(file_path):
     wr = wave.open(file_path, 'r')
     splitted_file_path = file_path.split("/")
     directory_path = "/".join(splitted_file_path[:-1]) + "/" if len(splitted_file_path) > 1 else "./"
-    # print(directory_path)
+    # below part of the function is taken from https://stackoverflow.com/a/43964107/6013366 and adopted for my homework
+    # comments are also have enough imformation to explain, so I didn't changed the comments in order to make code as
+    # clean as possible.
+
     # Set the parameters for the output file.
     par = list(wr.getparams())
     par[3] = 0  # The number of samples will be set by writeframes.
@@ -37,37 +40,6 @@ def readAndProcessWavUsingRftt(file_path):
         ww.writeframes(ns.tostring())
     wr.close()
     ww.close()
-
-def readAndProcessWav(file_path):
-    from pydub import AudioSegment
-    from pydub.playback import play
-
-    sound = AudioSegment.from_file(file_path, format="wav")
-
-    # shift the pitch up by half an octave (speed will increase proportionally)
-    octaves = 0.5
-
-    new_sample_rate = int(sound.frame_rate * (2.0 ** octaves))
-
-    # keep the same samples but tell the computer they ought to be played at the 
-    # new, higher sample rate. This file sounds like a chipmunk but has a weird sample rate.
-    hipitch_sound = sound._spawn(sound.raw_data, overrides={'frame_rate': new_sample_rate})
-
-    # now we just convert it to a common sample rate (44.1k - standard audio CD) to 
-    # make sure it works in regular audio players. Other than potentially losing audio quality (if
-    # you set it too low - 44.1k is plenty) this should now noticeable change how the audio sounds.
-    hipitch_sound = hipitch_sound.set_frame_rate(44100)
-
-    #Play pitch changed sound
-    play(hipitch_sound)
-
-    
-    # take export directory
-    splitted_file_path = file_path.split("/")
-    directory_path = "/".join(splitted_file_path[:-1]) + "/" if len(splitted_file_path) > 1 else "./"
-
-    #export / save pitch changed sound
-    hipitch_sound.export( directory_path + "out.wav", format="wav")
 
 def readWav(file_path):
     # inspired from https://stackoverflow.com/a/42567511/6013366
